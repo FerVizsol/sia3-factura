@@ -1,0 +1,152 @@
+<%- include('partials/_header') %>
+<h1 class="mt-3 ms-3">CREAR FACTURA NUEVA</h1>
+
+<div class="container mt-5">
+    <div class="row row-cols-2">
+        <div class="col-md4 order-md2.mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <p>Selecciona Vendedor</p>
+                    <div class="form-group">
+                        <select class="form-select" id="vendedor">
+                            <% if (dataV) { %>
+                                <% for (var i = 0; i < dataV.length; i++) { %>
+                                    <option> <%=dataV[i].codVendedor + " - " + dataV[i].NombreApellido %></option>
+                                <% } %>
+                            <% } %>
+                        </select> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md4 order-md1">
+            <div class="card">
+                <div class="card-body">
+                    <p>Selecciona Punto de Venta</p>
+                    <div class="form-group">
+                        <select class="form-select" id="puntoVenta">
+                            <% if (dataPun) { %>
+                                <% for (var i = 0; i < dataPun.length; i++) { %>
+                                    <option> <%= dataPun[i].codPunto + " - " + dataPun[i].descripcion %></option>
+                                <% } %>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row row-cols-2">
+        <div class="col-md4 order-md2.mb-4">
+            <div class="col-md4 order-md2.mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p>Agregar Productos</p>
+                        <div class="row row-cols-2 mb-2">
+                            <div class="col-md4 order-md2.mb-4">
+                                <label for="exampleSelect1" class="form-label mt-2">Productos:</label>
+                                <div class="search-container">
+                                    <input type="text" id="searchProductoInput" placeholder="Buscar por Codigo">
+                                    <ul id="searchProductoResults" class="search-results"></ul>
+                                  </div>
+                                  <div id="productoDetails"></div>
+                            </div>
+                            
+                            <div class="col-md-4 order-md-2 mb-4">
+                                <label for="exampleSelect1" class="form-label mt-2">Cantidad:</label>
+                                <input type="number" min="1" class="form-control" id="cantidadInput" placeholder="Cantidad" autocomplete="on" value="1">
+                            </div>
+                              
+                              <div class="col-md-12">
+                                <button type="button" class="btn btn-primary" id="agregarProductoButton">Agregar Producto a la lista</button>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md4 order-md1">
+            <div class="card">
+                <div class="card-body">
+                    <p>Ingresar Cliente</p>
+                    <label for="exampleSelect1" class="form-label mt-2">Clientes registrados:</label>
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Buscar por RUC">
+                        <ul id="searchResults" class="search-results"></ul>
+                      </div>
+                      <!-- Show details of the selected item -->
+                      <div id="itemDetails"></div>
+                </div>             
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="row g-0">
+        <div class="col-sm-6 col-md8">
+            <div class="card">
+                <div class="card-body">
+                    <p>Lista Productos</p>
+                    <table class="table table-bordered table-hover" id="tablaProductos">
+                        <thead>
+                          <tr>
+                            <th>Item</th>
+                            <th>Descripcion</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Total</th>
+                            <th>Afecto IGV</th>
+                          </tr>
+                        </thead>
+                        <tbody id="productList">
+
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md4">
+            <div class="card">
+                <div class="card-body">
+                    <p>Detalles Moneda</p>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr>
+                                <td>OP AGRAVADA</td>
+                                <td id="opagravada-sum">0.00</td>
+                            </tr>
+                            <tr>
+                                <td>IGV</td>
+                                <td id="igv-sum">0.00</td>
+                            </tr>
+                            <tr>
+                                <td>OP EXONERADO</td>
+                                <td id="op-exoneradosum">0.00</td>
+                            </tr>
+                            <tr>
+                                <td>IMPORTE TOTAL</td>
+                                <td id="importetotal">0.00</td>
+                            </tr>
+                            
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+        <div class="d-grid gap-2">
+            <button type="button" class="btn btn-lg btn-primary" id="crearfactura">CREAR FACTURA</button>
+          </div>
+
+<script src="/scripts/script.js"></script>
+
+<%- include('partials/_footer') %>

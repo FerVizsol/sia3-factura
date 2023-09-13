@@ -1,0 +1,110 @@
+<%- include('partials/_header') %>
+<% console.log( "kieeee" + clienteInfo[0][0]) %>
+<div class="container m-5 mx-auto">
+    <div class="row">
+        <div class="col-md-4 div1 card border-0 mt-2">
+            <container class="card-box">
+                <h3> SAN MIGUEL IERL</h3>
+                <p>Av. Circunvalacion lt.203</p>
+                <p class="d-inline">sanmiguel@contacto.com</p><p class="d-inline"> - </p><p class="d-inline ml-3">982543417</p>
+            </container>
+        </div>
+        <div class="col-md-4 div2 card border-5 mt-2 offset-md-4">
+            <container class="card-box mx-auto text-center">
+                <p class="mb-1 mt-1">
+                    2050364496
+                </p>
+                <h3 class="mt-1 mb-1">FACTURA ELECTRONICA</h3>
+                <p class="mb-1">
+                    <p class="mb-1"><%= facturaInfo[0].codFactura %></p>
+                </p>
+            </container>
+        </div>
+        <div class="col-md-12 div3 card border-5 mt-2">
+            <container class="card-box">
+                <p> </p>
+                <p class="mb-1">Cliente: <%= clienteInfo[0].nombre %></p>
+                <p class="mb-1">Fecha de Emision: <%= facturaInfo[0].fecha_emision %></p>
+                <p class="mb-1">RUC: <%= clienteInfo[0].codRuc %></p>
+                <p class="mb-1">DIRECCION: <%= clienteInfo[0].direccion %></p>
+            </container>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="border-5 col-md-12 div4 ">
+            <container class="card-box ">
+                <table class="table table-bordered table-hover ">
+                    <thead>
+                        <tr>
+                            <th>Num</th>
+                            <th>Descripción</th>
+                            <th>Cantidad</th>
+                            <th>Costo Unitario</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% cuerpoInfo.forEach(function(producto, index) { %>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td><%= producto.nombre_producto %></td>
+                                <td><%= producto.cantidadComprada %></td>
+                                <td><%= producto.costoUnitario %></td>
+                                <td><%= producto.total %></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </container>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-5 div2 card border-5 mt-2 offset-md-7">
+            <container class="card-box">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <td>OP AGRAVADA</td>
+                            <td>
+                                <%= totalInfo[0].opAgravadas.toFixed(2) %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>IGV</td>
+                            <td>
+                                <%= totalInfo[0].IGV.toFixed(2) %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>OP EXONERADO</td>
+                            <td>
+                                <%= totalInfo[0].opExonerado.toFixed(2) %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>IMPORTE TOTAL</td>
+                            <td>
+                                <% 
+                                let importeTotal = totalInfo[0].opAgravadas + totalInfo[0].IGV + totalInfo[0].opExonerado;
+                                %>
+                                <%= importeTotal.toFixed(2) %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </container>
+        </div>
+    </div>
+</div>
+  <div class="d-grid gap-2">
+    <button type="button" class="btn btn-lg btn-primary" id="imprimir">IMPRIMIR FACTURA</button>
+  </div>
+  <script src="/scripts/imprimir.js"></script>
+<%- include('partials/_footer') %>

@@ -1,0 +1,62 @@
+<%- include('partials/_header') %>
+<h1 class="mt-3 ms-3">FACTURAS</h1>
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-md-7">
+          <table class="table table-bordered table-hover">
+              <thead>
+                  <tr>
+                      <th>Codigo Factura</th>
+                      <th>Fecha de Emision</th>
+                      <th>Numero RUC Cliente</th>
+                      <th>TOTAL</th>
+                      <th>ESTADO ACTUAL</th>
+                      <th>DOCUMENTO</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <% if (data) { %>
+                  <% for (var i = 0; i < data.length; i++) { %>
+                    <tr>
+                      <td><%= data[i].CodigoFactura %></td>
+                      <td><%= data[i].FechaEmision %></td>
+                      <td><%= data[i].NumeroRucCliente %></td>
+                      <td><%= data[i].CostoTotalFactura %></td>
+                      <td>
+                        <% if (data[i].EstadoFactura == 'C') { %>
+                          <span class="badge rounded-pill bg-success">COMPLETADA</span>
+                        <% } else if (data[i].EstadoFactura == 'R') { %>
+                          <span class="badge rounded-pill bg-primary">REGISTRADO</span>
+                        <% } else { %>
+                          <span class="badge rounded-pill bg-danger">ANULADA</span>
+                        <% } %>
+                      </td>
+                      <td>
+                      <container>
+                        <a class="text-center" href="/ENVIARFACTURA/<%=data[i].CodigoFactura %>">VER</a>
+                      </container>
+                      </td>
+                    </tr>
+                  <% } %>
+                <% } %>
+              </tbody>
+              
+              
+          </table>
+      </div>
+      <div class="col-md-5">
+          <div class="card">
+              <div class="card-body">
+                <h3>OPERACIONES</h3>
+                <form action="/crearfactura">
+                  <button type="submit" class="btn btn-success mt-2 mb-2" >CREAR FACTURA NUEVA</button>
+                </form>
+                <form action="/anularfactura">
+                  <button type="submit" class="btn btn-danger">ANULAR FACTURA</button>
+                </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<%- include('partials/_footer') %>

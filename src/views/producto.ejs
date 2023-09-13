@@ -1,0 +1,55 @@
+<%- include('partials/_header') %>
+<h1 class="mt-3 ms-3">PRODUCTOS</h1>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-7">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Costo Unitario</th>
+                        <th>Afectado por IGV?</th>
+                        <th>Tipo IGV</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (data) { %>
+                        <% for (var i = 0; i < data.length; i++) { %>
+                            <tr>
+                                <td><%= data[i].codProducto %></td>
+                                <td><%= data[i].nombre %></td>
+                                <td><%= data[i].costoUnitario %></td>
+                                <td>
+                                    <%- data[i].afectaIgv ? '<span class="badge rounded-pill bg-success">Si</span>' : '<span class="badge rounded-pill bg-danger">No</span>' %>
+                                </td>
+                                <td><%= data[i].tipoIgv %></td>
+                            </tr>
+                        <% } %>
+                    <% } %>
+                </tbody>
+                
+                
+                
+            </table>
+        </div>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/addProducto" method="POST">
+                        <div class="form-group mb-2">
+                            <input type="text" name="name" placeholder="Nombre" class="form-control mb-2">
+                            <input type="number" name="price" placeholder="Precio" class="form-control mb-2">
+                            <input type="checkbox" name="igv" placeholder="IGV" class="form-control mb-2">
+                            <input type="text" name="igvType" placeholder="Tipo IGV" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            Agregar Producto
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('partials/_footer') %>

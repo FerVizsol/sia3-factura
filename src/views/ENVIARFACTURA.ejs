@@ -72,32 +72,51 @@
                         <tr>
                             <td>OP AGRAVADA</td>
                             <td>
-                                <%= totalInfo[0].opAgravadas.toFixed(2) %>
+                                <%
+                                    let opAgravadaSum = 0;
+                                    totalInfo.forEach(function(info) {
+                                        opAgravadaSum += info.opAgravadas;
+                                    });
+                                %>
+                                <%= opAgravadaSum.toFixed(2) %>
                             </td>
                         </tr>
                         <tr>
                             <td>IGV</td>
                             <td>
-                                <%= totalInfo[0].IGV.toFixed(2) %>
+                                <%
+                                    let igvSum = 0;
+                                    totalInfo.forEach(function(info) {
+                                        igvSum += info.IGV;
+                                    });
+                                %>
+                                <%= igvSum.toFixed(2) %>
                             </td>
                         </tr>
                         <tr>
                             <td>OP EXONERADO</td>
                             <td>
-                                <%= totalInfo[0].opExonerado.toFixed(2) %>
+                                <%
+                                    let opExoneradoSum = 0;
+                                    totalInfo.forEach(function(info) {
+                                        opExoneradoSum += info.opExonerado;
+                                    });
+                                %>
+                                <%= opExoneradoSum.toFixed(2) %>
                             </td>
                         </tr>
                         <tr>
                             <td>IMPORTE TOTAL</td>
                             <td>
-                                <% 
-                                let importeTotal = totalInfo[0].opAgravadas + totalInfo[0].IGV + totalInfo[0].opExonerado;
+                                <%
+                                    let importeTotal = opAgravadaSum + igvSum + opExoneradoSum;
                                 %>
                                 <%= importeTotal.toFixed(2) %>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                
                 
             </container>
         </div>
